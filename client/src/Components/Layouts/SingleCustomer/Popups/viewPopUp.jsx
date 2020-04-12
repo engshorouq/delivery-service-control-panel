@@ -18,7 +18,7 @@ class View extends Component {
 
   render() {
     const columns = [{ title: 'اسم الطلبية', dataIndex: 'f2' },
-    { title: 'السعر', dataIndex: 'f3' }];
+    { title: 'السعر/ر.س', dataIndex: 'f3' }];
     if (this.state.information) {
       const { information } = this.state;
       return (
@@ -33,25 +33,32 @@ class View extends Component {
         >
           <div className="view__captain">
             <div className="view__captain-box">
-              <p className="view__captain__paragraph">اسم الكابتن : </p>
+              <p className="view__captain__paragraph">اسم الزبون : </p>
               <p className="view__captain-value">{information.captain}</p>
+              {/* بدل كاستمر  */}
             </div>
             <div className="view__captain-box">
               <p className="view__captain__paragraph">تاريخ الطلبية : </p>
               <p className="view__captain-value">{information.date}</p>
             </div>
             <div className="view__captain-box">
-              <p className="view__captain__paragraph">اسم المكان : </p>
+              <p className="view__captain__paragraph"> عنوان الزبون: </p>
               <p className="view__captain-value">{information.place}</p>
+              {/* لعنوان الزبون مش الطلب */}
             </div>
             <div className="view__captain-box">
               <p className="view__captain__paragraph">حالة الطلب : </p>
               <p className="view__captain-value">{information.status}</p>
             </div>
+            <div className="view__captain-box">
+              <p className="view__captain__paragraph"> هاتف الزبون: </p>
+              <p className="view__captain-value">{information.phone}</p>
+              {/* تلفون العميل مش الطلب */}
+            </div>
             <Table dataSource={information.items} columns={columns} className="view__captain-table" />
             <div className="view__captain-box">
               <p className="view__captain__paragraph">السعر الكلي : </p>
-              <p className="view__captain-value">{information.price}</p>
+              <p className="view__captain-value">{information.price} ر.س</p>
             </div>
           </div>
         </Modal>

@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
-import EditOrder from "./Popups/EditOrder";
+// import EditOrder from "./Popups/EditOrder";
 import DeletePopup from "./Popups/deletePopup";
 import View from "./Popups/viewPopUp";
 import WrappedComponent from "../../HOC/WithNavSide";
@@ -107,14 +107,14 @@ class Profile extends Component {
       obj.date = result[key][0].date.split("T")[0];
       obj.status = result[key][0].status;
       obj.captain = result[key][0].name;
-      obj.price = result[key][0].total + "$";
+      obj.price = result[key][0].total + "ر.س";
       obj.place = result[key][0].place_name;
       obj.items = result[key][0].items_names;
       obj.phone = result[key][0].phone;
       obj.address = result[key][0].address;
       return obj;
     });
-    this.setState({ tableInfo: table });
+    this.setState({ tableInfo: table }, () => { console.log(457, table[0].items[0].f2, 88) });
   };
   deleteRow = id => {
     this.setState(prev => {
@@ -156,10 +156,10 @@ class Profile extends Component {
               <p className="profile__box__title">الحالة</p>
               <p className="profile__value">{status}</p>
             </div>
-            <div className="profile__box">
+            {/* <div className="profile__box">
               <p className="profile__box__title">البريد الالكتروني</p>
               <p className="profile__value">{email}</p>
-            </div>
+            </div> */}
             <div className="profile__box">
               <p className="profile__box__title">العنوان</p>
               <p className="profile__value">{address}</p>
@@ -170,7 +170,7 @@ class Profile extends Component {
               pageName="singleCustomer"
               columns={tableInfo}
               viewValues={this.handleClick}
-              EditPopup={EditOrder}
+              // EditPopup={EditOrder}
               stores={this.state.stores}
             />
             <DeletePopup

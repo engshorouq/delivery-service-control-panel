@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { css } from '@emotion/core';
 import { ClipLoader } from 'react-spinners';
 import './style.css';
-import { Input, notification, Icon, DatePicker,Button } from 'antd';
+import { Input, notification, Icon, DatePicker, Button } from 'antd';
 import Table from '../../CommonComponent/Table/Table';
-import Buttoncomponent from '../../CommonComponent/Button';
+// import Buttoncomponent from '../../CommonComponent/Button';
 import Header from "../../CommonComponent/Header/index";
-import CollectionCreateForm from "./addcustomer";
+// import CollectionCreateForm from "./addcustomer";
 import Deletepopup from "./deletecustomer";
-import EditCustomer from "./editcustomer";
+// import EditCustomer from "./editcustomer";
 import WrappedComponent from '../../HOC/WithNavSide';
 
 
@@ -18,7 +18,7 @@ const override = css`
   margin: 0 auto;
   border-color: red;
 `;
- class Customers extends Component {
+class Customers extends Component {
   state = {
     customers: [],
     title: " إدارةالمستخدمين ",
@@ -27,7 +27,7 @@ const override = css`
     date: "",
     filteredcustomersDate: [],
     filteredcustomersName: [],
-    visible: false,
+    // visible: false,
     loading: true,
     customersPage: {
       delete: {
@@ -35,11 +35,11 @@ const override = css`
         information: [],
         id: ""
       },
-      edit: {
-        editVisibility: false,
-        id: "",
-        information: []
-      }
+      // edit: {
+      //   editVisibility: false,
+      //   id: "",
+      //   information: []
+      // }
     },
     error: ""
   };
@@ -89,12 +89,14 @@ const override = css`
         } else this.setState({ customers: this.state.allData, name });
       }
     } else {
-      
+
       this.setState(
-        { customers: this.state.allData ,
-          name:'',
-          date:''
-        });}
+        {
+          customers: this.state.allData,
+          name: '',
+          date: ''
+        });
+    }
   };
   dateFilter = (value, customers) => {
     if (value.length !== 0) {
@@ -133,56 +135,56 @@ const override = css`
     });
   };
 
-  showModal = () => {
-    this.setState(prev => {
-      return { visible: !prev.visible };
-    });
-  };
-  handleCancel = () => {
-    this.setState({ visible: false });
-  };
+  // showModal = () => {
+  //   this.setState(prev => {
+  //     return { visible: !prev.visible };
+  //   });
+  // };
+  // handleCancel = () => {
+  //   this.setState({ visible: false });
+  // };
 
-  handleCreate = () => {
-    const form = this.formRef.props.form;
-    form.validateFields((err, values) => {
-      if (err) {
-        this.openNotificationWithIcon("error", err);
-      } else if (values) {
-        let addCustomer = {
-          name: values.name,
-          email: values.email,
-          phone: values.prefixPhone + values.phone,
-          status: values.status ==="true" ? true:false,
-          address: values.address,
-          password: values.password
-        };
-        fetch("api/v1/addcustomer", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify(addCustomer)
-        })
-          .then(res => res.json())
-          .then(result => {
-            if (result.result) {
-              let newcustomer = [...this.state.customers];
-              newcustomer.push(result.result[0]);
-              let newallData = [...this.state.allData];
-              newallData.push(result.result[0]);
-              this.setState({
-                customers: newcustomer,
-                allData: newallData
-              });
-              this.openNotificationWithIcon("success", "تمت الاضافة بنجاح");
-              form.resetFields();
-              this.setState({ visible: false });
-            } else this.openNotificationWithIcon("error", result.error);
-          })
-          .catch(() =>
-            this.openNotificationWithIcon("error", "خطأ في ارسال البيانات")
-          );
-      }
-    });
-  };
+  // handleCreate = () => {
+  //   const form = this.formRef.props.form;
+  //   form.validateFields((err, values) => {
+  //     if (err) {
+  //       this.openNotificationWithIcon("error", err);
+  //     } else if (values) {
+  //       let addCustomer = {
+  //         name: values.name,
+  //         email: values.email,
+  //         phone: values.prefixPhone + values.phone,
+  //         status: values.status === "true" ? true : false,
+  //         address: values.address,
+  //         password: values.password
+  //       };
+  //       fetch("api/v1/addcustomer", {
+  //         method: "POST",
+  //         headers: { "content-type": "application/json" },
+  //         body: JSON.stringify(addCustomer)
+  //       })
+  //         .then(res => res.json())
+  //         .then(result => {
+  //           if (result.result) {
+  //             let newcustomer = [...this.state.customers];
+  //             newcustomer.push(result.result[0]);
+  //             let newallData = [...this.state.allData];
+  //             newallData.push(result.result[0]);
+  //             this.setState({
+  //               customers: newcustomer,
+  //               allData: newallData
+  //             });
+  //             this.openNotificationWithIcon("success", "تمت الاضافة بنجاح");
+  //             form.resetFields();
+  //             this.setState({ visible: false });
+  //           } else this.openNotificationWithIcon("error", result.error);
+  //         })
+  //         .catch(() =>
+  //           this.openNotificationWithIcon("error", "خطأ في ارسال البيانات")
+  //         );
+  //     }
+  //   });
+  // };
   handleClick = (value1, value2, value3, information, id) => e => {
     const { customersPage } = this.state;
     this.setState(prev => {
@@ -205,23 +207,23 @@ const override = css`
       };
     });
   };
-  updateState = (id, editedCustomer) => {
-    let editcustomer = this.state.customers.map(customer => {
-      if (customer.pk_i_id === id) {
-        return editedCustomer[0];
-      }
-      return customer;
-    });
-    this.setState({
-      customers: editcustomer
-    });
-  };
-  saveFormRef = formRef => {
-    this.formRef = formRef;
-  };
-  editFormRef = formEdit => {
-    this.formEdit = formEdit;
-  };
+  // updateState = (id, editedCustomer) => {
+  //   let editcustomer = this.state.customers.map(customer => {
+  //     if (customer.pk_i_id === id) {
+  //       return editedCustomer[0];
+  //     }
+  //     return customer;
+  //   });
+  //   this.setState({
+  //     customers: editcustomer
+  //   });
+  // };
+  // saveFormRef = formRef => {
+  //   this.formRef = formRef;
+  // };
+  // editFormRef = formEdit => {
+  //   this.formEdit = formEdit;
+  // };
   render() {
     if (this.state.customers && !this.state.error) {
       return (
@@ -229,25 +231,25 @@ const override = css`
           <div className="conatinercustomers__customer">
             <Header title="إدارة المستخدمين" Icon={<Icon type="team" />} />
             <div className="addcustomer">
-              <Buttoncomponent
+              {/* <Buttoncomponent
                 name="إضافة مستخدم"
                 icon={<Icon type="user" />}
                 onClick={this.showModal}
-              />
-              <CollectionCreateForm
+              /> */}
+              {/* <CollectionCreateForm
                 wrappedComponentRef={this.saveFormRef}
                 visible={this.state.visible}
                 onCancel={this.handleCancel}
                 onCreate={this.handleCreate}
                 onchange={this.onchange}
-              />
+              /> */}
               <Deletepopup
                 visible={this.state.customersPage.delete.deleteVisibility}
                 changevisibility={this.handleClick}
                 id={this.state.customersPage.delete.id}
                 updateState={this.deleteRowCustomer}
               />
-
+              {/* 
               <EditCustomer
                 visible={this.state.customersPage.edit.editVisibility}
                 information={this.state.customersPage.edit.information}
@@ -255,9 +257,9 @@ const override = css`
                 wrappedComponentRef={this.editFormRef}
                 id={this.state.customersPage.edit.id}
                 updateState={this.updateState}
-              />
+              /> */}
               <div className="filtercontainer">
-              <Button onClick={e=>this.filterfunction("","","empty")}>إفراغ الحقول</Button>
+                <Button onClick={e => this.filterfunction("", "", "empty")}>إفراغ الحقول</Button>
                 <div classNam="filtercontainer__orderdate">
                   <RangePicker
                     showTime={{ format: "HH:mm" }}

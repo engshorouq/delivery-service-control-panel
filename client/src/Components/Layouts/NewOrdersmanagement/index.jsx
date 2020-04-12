@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { DatePicker, Input, Button, Icon } from "antd";
+import { DatePicker, Input, Button, Icon, notification } from "antd";
+
 import moment from "moment";
 import Header from "../../CommonComponent/Header/index";
 import TableComponent from "../../CommonComponent/Table/Table";
 import {
   // EditPopup,
   DeletePopup,
-  ViewPopup
+  // ViewPopup
 } from "../../CommonComponent/Table/Popups";
-// import CollectionsPage from "../Order/addOrder";
 import WrappedComponent from "../../HOC/WithNavSide";
 import "./style.css";
 
@@ -25,20 +25,92 @@ class OrdersManagement extends Component {
     refresh: true
   };
 
+
+
+
+  changeStatus = (key) => e => {
+    console.log(e, 88, key)
+    const formData = new FormData();
+    formData.append("e", e);
+
+    fetch(`/api/v1/putStatus/${key}`, {
+      method: "PUT",
+      body: formData
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.result) {
+          console.log(45, res.result)
+          // this.props.updateCaptain(res.result[0]);
+          notification.success({
+            message: "تم تغيير حالة الطلب بنجاح",
+            duration: 1.5,
+          });
+        } else {
+
+          notification.open({
+            message: res.error,
+            duration: 1.5,
+          });
+        }
+      })
+      .catch(err => {
+        console.log(88, err)
+
+        notification.error({
+          message: "هناك خطأ اعد المحاولة مرة اخرى",
+          duration: 1.5,
+        });
+      });
+
+
+
+
+
+
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   componentDidMount() {
     axios
-      .get("/api/v1/viewOrders")
+      .get("/api/v1/viewnewOrders")
       .then(res => {
+
         if (res.status === 204) {
           let error = [...this.state.error];
           error.response = res;
           error.response.data = "Error, No orders yet.";
           this.setState({ error });
         } else {
+
           this.setState({ orders: res.data });
         }
       })
       .catch(error => {
+        console.log(11, error, 22);
         this.setState({
           error
         });
@@ -81,68 +153,23 @@ class OrdersManagement extends Component {
     }
   };
 
-  statusFilter = object => {
-    if (object) {
-      const { status } = this.state;
-      if (status) {
-        let filtered = [];
-        const regex1 = new RegExp(/^[(م)]/);
-        const regex2 = new RegExp(/^[(غ)]/);
-        filtered = object.filter(order => {
-          if (
-            (order.b_status === 1 &&
-              regex1.test(status) &&
-              "مستلم".indexOf(status) != -1) ||
-            (order.b_status === 0 &&
-              regex2.test(status) &&
-              "غير مستلم".indexOf(status) != -1)
-          ) {
-            return true;
-          } else if (order.b_status == status) {
-            return true;
-          }
-        });
-        return filtered;
-      } else {
-        return object;
-      }
-    }
-  };
+
 
   filter = async (type, value) => {
     const { date, status, orders } = this.state;
     let filtered = [];
     if (type === "date") {
       await this.setState({ date: value });
-      if (status) {
-        filtered = this.statusFilter(orders);
 
-        filtered = this.dateFilter(filtered);
-        this.setState({ filteredOrders: filtered, filter: true });
-      }
 
-      else if (value.length > 0) {
+      if (value.length > 0) {
         filtered = this.dateFilter(orders);
-        this.setState({ filteredOrders: filtered, filter: true });
-      } else {
-        this.setState({ filteredOrders: [], filter: false });
-      }
-    } else if (type === "status") {
-      await this.setState({ status: value });
-      if (date) {
-        filtered = this.dateFilter(orders);
-
-        filtered = this.statusFilter(filtered);
-        this.setState({ filteredOrders: filtered, filter: true });
-      }
-
-      else if (value.length > 0) {
-        filtered = this.statusFilter(orders);
         this.setState({ filteredOrders: filtered, filter: true });
       } else {
         this.setState({ filteredOrders: [], filter: false });
       }
     }
+
 
   };
 
@@ -159,28 +186,6 @@ class OrdersManagement extends Component {
       return { orders: prev.orders.filter(data => data.key !== id) };
     });
   };
-  // updateNewOrdersStateVariable = (storeId, phone, address, itms, orderId, customer, captain) => {
-  //         let x = {};
-  //         x.key = orderId;
-  //         x.customer = customer;
-  //         x.captain = captain;
-  //         x.storeid = storeId;
-  //         x.address = address;
-  //         x.phone = phone;
-  //         x.items = itms;
-  //         x.b_status = 1;
-  //         x.date = new Date(Date.now()).toLocaleString('br-BR').split(' ')[0];
-  //         if (itms.length > 1) {
-  //           x.price = itms.reduce((acc, nxt) => {
-  //             return acc + Number(nxt.price);
-  //           }, 0);
-  //         } else if(itms[0].price) {
-  //           x.price = parseInt(itms[0].price);
-  //         }else {
-  //           x.price = 0;
-  //         }
-  //     this.setState({ orders: this.state.orders.concat([x]) });
-  // }
   updateOrdersStateVariable = (storeId, phone, address, itms, orderId) => {
     this.setState(prev => {
       prev.orders.forEach(element => {
@@ -227,12 +232,10 @@ class OrdersManagement extends Component {
       return (
         <div className="ordersManagement-bars-container">
           <div className="ordersManagement-main-container">
-            <Header title={"إدارة الطلبات"} Icon={<Icon type="carry-out" />} />
+            <Header title={"إدارة الطلبات الجديدة"} Icon={<Icon type="carry-out" />} />
             <div className="ordersManagement_sub-container">
               <div>
-                {/* <CollectionsPage
-                  updateNewOrdersStateVariable={this.updateNewOrdersStateVariable}
-                /> */}
+
                 <div className="ordersManagement_filters-container">
                   <div className="ordersManagement_filters-container-timeFilter">
                     <p
@@ -248,28 +251,22 @@ class OrdersManagement extends Component {
                       value={this.state.date}
                     />
                   </div>
-                  <Input
-                    id="statusInput"
-                    onChange={e => this.filter("status", e.target.value)}
-                    className="ordersManagement_status-filter-input"
-                    placeholder="الفلترة حسب الحالة :"
-                    value={this.state.status}
-                  />
 
                   <Button
                     className="ordersManagement_filter-button"
                     type="primary"
                     onClick={this.clearFields}
                   >
-                    إفراغ الحقول
+                    إفراغ الحقل
                   </Button>
                 </div>
                 <TableComponent
                   stores={this.state.stores}
-                  pageName="orders"
-                  ViewPopup={ViewPopup}
-                  // EditPopup={EditPopup}
+                  pageName="neworders"
+                  // ViewPopup={ViewPopup}
                   DeletePopup={DeletePopup}
+                  changeStatus={this.changeStatus}
+
                   updateOrdersStateVariable={this.updateOrdersStateVariable}
                   updateItemsStateVariable={this.updateItemsStateVariable}
                   deleteRow={this.deleteRow}

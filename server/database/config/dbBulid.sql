@@ -25,7 +25,7 @@ CREATE TABLE TUser
     s_name TEXT NOT NULL,
     s_mobile_number TEXT NOT NULL,
     s_email TEXT NOT NULL UNIQUE,
-    b_status BOOLEAN NOT NULL,
+    b_status BOOLEAN NOT NULL DEFAULT true,
     s_address TEXT NOT NULL,
     s_access_token TEXT,
     s_image TEXT DEFAULT 'user.png',
@@ -54,8 +54,10 @@ CREATE TABLE orders
     dt_create_at DATE DEFAULT current_date,
     dt_delete_at DATE,
     customer_name TEXT,
-    i_status INTEGER DEFAULT 0,--0 INPROGRESS 1 DONE
-    dt_modified_date DATE
+    i_status INTEGER DEFAULT 2,--0 INPROGRESS 1 DONE
+    dt_modified_date DATE,
+    o_price FLOAT
+
 );
 
 CREATE TABLE items

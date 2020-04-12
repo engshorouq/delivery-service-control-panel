@@ -1,7 +1,7 @@
 .login {
   display: flex;
   flex-direction: column;
-  background-color: #201F2B;
+  background-color: #a22a5f;
   height: 100vh;
 
 }
@@ -44,7 +44,7 @@
   font-size: 1rem;
   margin-top: 2rem;
   color: white;
-  background-color: #201F2B;
+  background-color: #a22a5f;
   border-radius: 0.4rem;
   outline: none;
   font-family: cairo;
@@ -53,8 +53,8 @@
 } 
 
 .login__box__button:hover{
-  background: #101017;
-  box-shadow: 0 0 5px #201f2c;
+  background: #db78a3;
+  box-shadow: 0 0 5px #db78a3;
 }
 
 .login__box__title{
