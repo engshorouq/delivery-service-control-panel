@@ -7,9 +7,7 @@ import NewOrdersManagement from "./Components/Layouts/NewOrdersmanagement";
 import OrdersManagement from "./Components/Layouts/Ordersmanagement";
 
 
-import SingleCaptain from "./Components/Layouts/SingleCaptains";
 import SingleCastomer from "./Components/Layouts/SingleCustomer";
-import Captains from "./Components/Layouts/Captains";
 import NotFound from "./Components/Layouts/NotFound";
 import InProgress from "./Components/Layouts/ToBuildLater";
 
@@ -33,12 +31,7 @@ class App extends Component {
               path="/customers/profile/:id"
               component={SingleCastomer}
             />
-            {/* <Route exact path="/captains" component={Captains} />
-            <Route
-              exact
-              path="/captains/profile/:id"
-              component={SingleCaptain}
-            /> */}
+
 
             <Route exact path="/in-progress" component={InProgress} />
             <Route exact path="/not-found" component={NotFound} />

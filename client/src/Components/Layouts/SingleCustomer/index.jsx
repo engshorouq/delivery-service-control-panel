@@ -5,7 +5,6 @@ import { withRouter } from "react-router-dom";
 
 import Header from "../../CommonComponent/Header";
 import Table from "../../CommonComponent/Table/Table";
-// import EditOrder from "./Popups/EditOrder";
 import DeletePopup from "./Popups/deletePopup";
 import View from "./Popups/viewPopUp";
 import WrappedComponent from "../../HOC/WithNavSide";
@@ -23,7 +22,6 @@ class Profile extends Component {
       avatar: ""
     },
     visible: false,
-    stores: [],
     error: "",
     tableInfo: [],
     singleCustomer: {
@@ -78,8 +76,14 @@ class Profile extends Component {
       .then(res => res.json())
       .then(res => {
         const { error } = res;
-        if (error) this.setState({ error });
+        if (error) {
+          console.log(error, 8888)
+
+          this.setState({ error });
+        }
         else {
+          console.log(res.result, 8888888889411)
+
           this.convertToObjectForTable(res.result);
         }
       })
@@ -87,34 +91,26 @@ class Profile extends Component {
         this.setState({ error: "Something error please try again" });
       });
 
-    axios
-      .get("/api/v1/getStores")
-      .then(res => {
-        if (res) {
-          this.setState({ stores: res.data });
-        }
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
+
   }
 
   convertToObjectForTable = results => {
+
     const table = results.map(result => {
+      console.log('hhh', result)
       const obj = {};
       const key = Object.keys(result)[0];
       obj.key = key;
-      obj.date = result[key][0].date.split("T")[0];
-      obj.status = result[key][0].status;
-      obj.captain = result[key][0].name;
-      obj.price = result[key][0].total + "ر.س";
-      obj.place = result[key][0].place_name;
-      obj.items = result[key][0].items_names;
-      obj.phone = result[key][0].phone;
-      obj.address = result[key][0].address;
+      obj.product = result[key].product_name;
+
+      obj.date = result[key].date.split("T")[0];
+      obj.status = result[key].b_status;
+      obj.price = result[key].price + "ر.س";
+
       return obj;
     });
-    this.setState({ tableInfo: table }, () => { console.log(457, table[0].items[0].f2, 88) });
+    this.setState({ tableInfo: table }
+    );
   };
   deleteRow = id => {
     this.setState(prev => {
@@ -156,10 +152,7 @@ class Profile extends Component {
               <p className="profile__box__title">الحالة</p>
               <p className="profile__value">{status}</p>
             </div>
-            {/* <div className="profile__box">
-              <p className="profile__box__title">البريد الالكتروني</p>
-              <p className="profile__value">{email}</p>
-            </div> */}
+
             <div className="profile__box">
               <p className="profile__box__title">العنوان</p>
               <p className="profile__value">{address}</p>
@@ -170,8 +163,7 @@ class Profile extends Component {
               pageName="singleCustomer"
               columns={tableInfo}
               viewValues={this.handleClick}
-              // EditPopup={EditOrder}
-              stores={this.state.stores}
+
             />
             <DeletePopup
               visible={this.state.singleCustomer.deleteVisibility}

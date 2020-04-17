@@ -5,11 +5,9 @@ import moment from "moment";
 import Header from "../../CommonComponent/Header/index";
 import TableComponent from "../../CommonComponent/Table/Table";
 import {
-  // EditPopup,
   DeletePopup,
   ViewPopup
 } from "../../CommonComponent/Table/Popups";
-// import CollectionsPage from "../Order/addOrder";
 import WrappedComponent from "../../HOC/WithNavSide";
 import "./style.css";
 
@@ -21,7 +19,6 @@ class OrdersManagement extends Component {
     status: "",
     error: "",
     filter: false,
-    stores: [],
     refresh: true
   };
 
@@ -35,22 +32,17 @@ class OrdersManagement extends Component {
           error.response.data = "Error, No orders yet.";
           this.setState({ error });
         } else {
+          console.log(7778888, res.data)
           this.setState({ orders: res.data });
         }
       })
       .catch(error => {
+        console.log('ba', error)
         this.setState({
           error
         });
       });
-    axios
-      .get("/api/v1/getStores")
-      .then(res => {
-        if (res) {
-          this.setState({ stores: res.data });
-        }
-      })
-      .catch(error => this.setState({ error }));
+
   }
 
   dateFilter = object => {
@@ -159,28 +151,7 @@ class OrdersManagement extends Component {
       return { orders: prev.orders.filter(data => data.key !== id) };
     });
   };
-  // updateNewOrdersStateVariable = (storeId, phone, address, itms, orderId, customer, captain) => {
-  //         let x = {};
-  //         x.key = orderId;
-  //         x.customer = customer;
-  //         x.captain = captain;
-  //         x.storeid = storeId;
-  //         x.address = address;
-  //         x.phone = phone;
-  //         x.items = itms;
-  //         x.b_status = 1;
-  //         x.date = new Date(Date.now()).toLocaleString('br-BR').split(' ')[0];
-  //         if (itms.length > 1) {
-  //           x.price = itms.reduce((acc, nxt) => {
-  //             return acc + Number(nxt.price);
-  //           }, 0);
-  //         } else if(itms[0].price) {
-  //           x.price = parseInt(itms[0].price);
-  //         }else {
-  //           x.price = 0;
-  //         }
-  //     this.setState({ orders: this.state.orders.concat([x]) });
-  // }
+
   updateOrdersStateVariable = (storeId, phone, address, itms, orderId) => {
     this.setState(prev => {
       prev.orders.forEach(element => {
@@ -230,9 +201,7 @@ class OrdersManagement extends Component {
             <Header title={"إدارة الطلبات"} Icon={<Icon type="carry-out" />} />
             <div className="ordersManagement_sub-container">
               <div>
-                {/* <CollectionsPage
-                  updateNewOrdersStateVariable={this.updateNewOrdersStateVariable}
-                /> */}
+
                 <div className="ordersManagement_filters-container">
                   <div className="ordersManagement_filters-container-timeFilter">
                     <p
@@ -265,10 +234,8 @@ class OrdersManagement extends Component {
                   </Button>
                 </div>
                 <TableComponent
-                  stores={this.state.stores}
                   pageName="orders"
                   ViewPopup={ViewPopup}
-                  // EditPopup={EditPopup}
                   DeletePopup={DeletePopup}
                   updateOrdersStateVariable={this.updateOrdersStateVariable}
                   updateItemsStateVariable={this.updateItemsStateVariable}

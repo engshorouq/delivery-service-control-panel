@@ -3,6 +3,7 @@ const getnewOrdersQuery = require('../../database/queries/order/getnewOrders');
 const getnewOrders = (req, res) => {
   getnewOrdersQuery()
     .then((response) => {
+      console.log(57, response, 57);
       if (response) {
         res.status(200).send(response);
       } else {
@@ -10,7 +11,7 @@ const getnewOrders = (req, res) => {
       }
     })
     .catch((e) => {
-      console.log(55, e, 22);
+      console.log(55, e, 55);
 
       res.status(500).send('Internal server error.');
     });

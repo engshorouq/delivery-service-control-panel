@@ -43,7 +43,6 @@ class TableCmponent extends Component {
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
             <Column title="التاريخ" dataIndex="date" key="date" />
-            {/* <Column title="عنوان" dataIndex="aaa" key="aaa" /> */}
             <Column
               title="الحالة"
               dataIndex="b_status"
@@ -69,7 +68,6 @@ class TableCmponent extends Component {
                 </span>
               )}
             />
-            <Column title="المبلغ الأجمالي(ر.س)" dataIndex="price" key="price" />
             <Column
               title="خيارات"
               key="options"
@@ -81,25 +79,13 @@ class TableCmponent extends Component {
                     customerAddress={record.address}
                     itemsArray={record.items}
                     storeId={record.storeid}
-                    stores={this.props.stores}
                     orderId={record.key}
-                    orderPrice={record.price}
                     captainName={record.captain}
                     orderDate={record.date}
                     orderStatus={record.b_status}
+                    orderPrice={record.price}
                   />
                   <Divider type="vertical" />
-                  {/* <EditPopup
-                    customerName={record.customer}
-                    phoneNumber={record.phone ? record.phone : ""}
-                    customerAddress={record.address}
-                    itemsArray={record.items}
-                    storeId={record.storeid}
-                    stores={this.props.stores}
-                    orderId={record.key}
-                    updateItemsStateVariable={this.props.updateItemsStateVariable}
-                    updateOrdersStateVariable={this.props.updateOrdersStateVariable}
-                  /> */}
 
                   <Divider type="vertical" />
 
@@ -114,10 +100,6 @@ class TableCmponent extends Component {
         </div>
       );
     }
-    // 
-
-
-
 
 
     if (this.props.pageName === "neworders") {
@@ -135,7 +117,7 @@ class TableCmponent extends Component {
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
             <Column title="التاريخ" dataIndex="date" key="date" />
-            <Column title="جوال الزبون" dataIndex="mob" key="mob" />
+            <Column title="جوال الزبون" dataIndex="phone" key="phone" />
             <Column title="المبلغ الأجمالي(ر.س)" dataIndex="pri" key="pri" />
             <Column
               title="خيارات"
@@ -148,7 +130,6 @@ class TableCmponent extends Component {
                     onChange={this.props.changeStatus(
                       record.key
                     )}
-                  // style={{}}
                   >
                     <Option value="2">جديد</Option>
                     <Option value="0">تم الاستلام</Option>
@@ -171,199 +152,6 @@ class TableCmponent extends Component {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // 
-
     else if (this.props.pageName === "customers") {
       return (
         <div className="tablecustomer-container">
@@ -378,7 +166,6 @@ class TableCmponent extends Component {
             }}
           >
             <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
-            {/* <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" /> */}
             <Column
               title="رقم الجوال"
               dataIndex="s_mobile_number"
@@ -427,20 +214,7 @@ class TableCmponent extends Component {
                     type="profile"
                   />
                   <Divider type="vertical" />
-                  {/* <Icon
-                    onClick={this.props.handleClick(
-                      "customersPage",
-                      "edit",
-                      "editVisibility",
-                      record,
-                      record.pk_i_id
-                    )}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  /> */}
+
                   <Icon
                     onClick={this.props.handleClick(
                       "customersPage",
@@ -462,26 +236,6 @@ class TableCmponent extends Component {
         </div>
       );
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     else if (this.props.pageName === "singleCustomer") {
@@ -497,8 +251,8 @@ class TableCmponent extends Component {
               pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
             }}
           >
-            {/* <Column title="إسم المنتج" dataIndex="items[0].f2" key="items" /> */}
-
+            <Column title="إسم المنتج" dataIndex="product" key="product" />
+            product
             <Column title="التاريخ" dataIndex="date" key="date" />
 
             <Column
@@ -507,51 +261,39 @@ class TableCmponent extends Component {
               key="status"
               render={status => (
 
-                < span >
+
+
+
+
+
+
+                <span>
                   <Tag
                     color={
-                      status === "غير مستلم"
+                      status == 1
                         ? "#f10e15"
-                        : status === "مستلم"
+                        : status == 0
                           ? "green"
                           : "blue"
                     }
                     key={status}
                   >
-                    {status}
+                    {status == 0
+                      ? "مستلم"
+                      : status == 1
+                        ? "غير مستلم"
+                        : "جديد"}
                   </Tag>
                 </span>
               )}
             />
-            <Column title="السعر" dataIndex="price" key="price" />
             <Column
               title="خيارات"
               key="options"
               render={(text, record) => (
                 <span>
-                  {/* <Icon
-                    onClick={this.props.viewValues(
-                      "singleCustomer",
-                      "viewVisibility",
-                      record.key,
-                      record
-                    )}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="profile"
-                  /> */}
-                  {/* <Divider type="vertical" /> */}
-                  {/* <EditPopup
-                    customerName={record.captain}
-                    phoneNumber={record.phone ? record.phone : ""}
-                    customerAddress={record.address}
-                    itemsArray={record.items}
-                    storeId={record.storeId}
-                    stores={this.props.stores}
-                    orderId={record.key}
-                  /> */}
+
+
                   <Divider type="vertical" />
                   <Icon
                     onClick={this.props.viewValues(
@@ -578,213 +320,6 @@ class TableCmponent extends Component {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    else if (this.props.pageName === "captains") {
-      return (
-        <div className="table-container">
-          <DropdownMenu
-            pageSize={this.state.pageSize}
-            paginationSize={this.paginationSize}
-          />
-          <Table
-            dataSource={columns}
-            pagination={{
-              pageSize: isNaN(this.state.pageSize)
-                ? columns.length
-                : parseInt(this.state.pageSize)
-            }}
-          >
-            <Column title="إسم الكابتن" dataIndex="s_name" key="captain" />
-            <Column title="البريد الإلكتروني" dataIndex="s_email" key="email" />
-            <Column
-              title="رقم الجوال"
-              dataIndex="s_mobile_number"
-              key="mobileNo"
-            />
-            <Column title="العنوان" dataIndex="s_address" key="address" />
-            <Column
-              title="الحالة"
-              dataIndex="b_status"
-              key="status"
-              render={status => (
-                <span>
-                  <Tag
-                    color={
-                      status === false
-                        ? "volcano"
-                        : status === true
-                          ? "green"
-                          : "blue"
-                    }
-                    key={status}
-                  >
-                    {status === true
-                      ? "فعال"
-                      : status === false
-                        ? "غير فعال"
-                        : status}
-                  </Tag>
-                </span>
-              )}
-            />
-            <Column
-              title="خيارات"
-              key="options"
-              render={(text, record) => (
-                <span>
-                  <Icon
-                    onClick={() => {
-                      this.props.history.push(
-                        `/captains/profile/${record.pk_i_id}`
-                      );
-                    }}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="profile"
-                  />
-                  <Divider type="vertical" />
-                  <Icon onClick={this.props.handleClick("captainsPage", "edit", "editVisibility", record, record.pk_i_id)}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="edit"
-                  />
-                  <Divider type="vertical" />
-                  <Icon
-                    onClick={this.props.handleClick(
-                      "captainsPage",
-                      "delete",
-                      "deleteVisibility",
-                      record,
-                      record.pk_i_id
-                    )}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="delete"
-                  />
-                </span>
-              )}
-            />
-          </Table>
-        </div>
-      );
-    } else if (this.props.pageName === "singleCaptain") {
-      return (
-        <div className="table-container">
-          <DropdownMenu
-            pageSize={pageSize}
-            paginationSize={this.paginationSize}
-          />
-          <Table
-            dataSource={columns}
-            pagination={{
-              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
-            }}
-          >
-            <Column title="إسم الزبون" dataIndex="customer" key="customer" />
-            <Column title="التاريخ" dataIndex="date" key="date" />
-            <Column
-              title="الحالة"
-              dataIndex="status"
-              key="status"
-              render={status => (
-                <span>
-                  <Tag
-                    color={
-                      status === "جاري التنفيذ"
-                        ? "#FFC700"
-                        : status === "تم"
-                          ? "green"
-                          : "blue"
-                    }
-                    key={status}
-                  >
-                    {status}
-                  </Tag>
-                </span>
-              )}
-            />
-            <Column title="السعر" dataIndex="price" key="price" />
-
-            <Column
-              title="خيارات"
-              key="options"
-              render={(text, record) => (
-                <span>
-                  <Icon
-                    onClick={this.props.viewValues(
-                      "singleCaptain",
-                      "viewVisibility",
-                      record.key,
-                      record
-                    )}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="profile"
-                  />
-                  <Divider type="vertical" />
-                  <EditPopup
-                    customerName={record.customer}
-                    phoneNumber={record.phone ? record.phone : ""}
-                    customerAddress={record.address}
-                    itemsArray={record.items}
-                    storeId={record.storeId}
-                    stores={this.props.stores}
-                    orderId={record.key}
-                  />
-                  <Divider type="vertical" />
-                  <Icon
-                    onClick={this.props.viewValues(
-                      "singleCaptain",
-                      "deleteVisibility",
-                      record.key,
-                      record
-                    )}
-                    style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
-                    }}
-                    type="delete"
-                    className={record.key}
-                  />
-                </span>
-              )}
-            />
-          </Table>
-        </div>
-      );
-    }
   }
 }
 

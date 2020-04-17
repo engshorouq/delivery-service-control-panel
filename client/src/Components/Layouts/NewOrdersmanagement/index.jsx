@@ -6,9 +6,7 @@ import moment from "moment";
 import Header from "../../CommonComponent/Header/index";
 import TableComponent from "../../CommonComponent/Table/Table";
 import {
-  // EditPopup,
   DeletePopup,
-  // ViewPopup
 } from "../../CommonComponent/Table/Popups";
 import WrappedComponent from "../../HOC/WithNavSide";
 import "./style.css";
@@ -21,7 +19,6 @@ class OrdersManagement extends Component {
     status: "",
     error: "",
     filter: false,
-    stores: [],
     refresh: true
   };
 
@@ -41,7 +38,6 @@ class OrdersManagement extends Component {
       .then(res => {
         if (res.result) {
           console.log(45, res.result)
-          // this.props.updateCaptain(res.result[0]);
           notification.success({
             message: "تم تغيير حالة الطلب بنجاح",
             duration: 1.5,
@@ -71,40 +67,20 @@ class OrdersManagement extends Component {
   };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   componentDidMount() {
     axios
       .get("/api/v1/viewnewOrders")
       .then(res => {
 
         if (res.status === 204) {
+          console.log(204);
+
           let error = [...this.state.error];
           error.response = res;
           error.response.data = "Error, No orders yet.";
           this.setState({ error });
         } else {
+          console.log(203);
 
           this.setState({ orders: res.data });
         }
@@ -115,14 +91,7 @@ class OrdersManagement extends Component {
           error
         });
       });
-    axios
-      .get("/api/v1/getStores")
-      .then(res => {
-        if (res) {
-          this.setState({ stores: res.data });
-        }
-      })
-      .catch(error => this.setState({ error }));
+
   }
 
   dateFilter = object => {
@@ -261,9 +230,7 @@ class OrdersManagement extends Component {
                   </Button>
                 </div>
                 <TableComponent
-                  stores={this.state.stores}
                   pageName="neworders"
-                  // ViewPopup={ViewPopup}
                   DeletePopup={DeletePopup}
                   changeStatus={this.changeStatus}
 
