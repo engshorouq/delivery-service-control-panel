@@ -11,6 +11,14 @@ CREATE TABLE users
     password TEXT NOT NULL
 );
 
+CREATE TABLE products (
+  id SERIAL  PRIMARY KEY,
+  imagePath VARCHAR,
+  title VARCHAR,
+  price INTEGER,
+  useMethod VARCHAR,
+  content TEXT
+);
 
 CREATE TABLE TUser
 (

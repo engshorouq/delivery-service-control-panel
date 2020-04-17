@@ -111,7 +111,7 @@ export default class Sidebar extends Component {
           <h1 className="sidebar__header">فولاج</h1>
           <div className="sidebar__bar">
             <div className='home'>
-              <Link to="/" className="sidebar__links ">
+              <Link to="/control" className="sidebar__links ">
                 <span>
                   الرئيسية
             <Icon type="home" className='icon-style' />

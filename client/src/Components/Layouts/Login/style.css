@@ -1,10 +1,21 @@
-.login {
+/* .login {
   display: flex;
   flex-direction: column;
   background-color: #a22a5f;
   height: 100vh;
 
 }
+.app {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+
+
 .login__title {
   height: 12rem;
   color: #fff;
@@ -65,4 +76,4 @@
 
 .login__box__error{
   color: rgb(255, 83, 83);
-}
+} */
