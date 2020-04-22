@@ -20,8 +20,7 @@ export default WrappedComponent =>
         .then(({ result }) => {
           this.setState({ login: result, fetch: true });
         })
-        .catch((e) => {
-          console.log('ch', e, 'hhh')
+        .catch(() => {
           notification.error({ message: 'هناك خطأ ما الرجاء المحاولة مرة اخرى' });
         })
     }
@@ -34,10 +33,7 @@ export default WrappedComponent =>
             <Sidebar />
             <div className="app-nav-and-components">
               <Navbar />
-              <div className="app">
-
-                <WrappedComponent {...this.props} />
-              </div>
+              <WrappedComponent {...this.props} />
             </div>
           </div>
         );

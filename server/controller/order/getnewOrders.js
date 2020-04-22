@@ -1,6 +1,6 @@
 const getnewOrdersQuery = require('../../database/queries/order/getnewOrders');
-
-const getnewOrders = (req, res) => {
+exports.getnewOrders = (req, res) => {
+  console.log(888)
   getnewOrdersQuery()
     .then((response) => {
       console.log(57, response, 57);
@@ -17,4 +17,3 @@ const getnewOrders = (req, res) => {
     });
 };
 
-module.exports = { getnewOrders };

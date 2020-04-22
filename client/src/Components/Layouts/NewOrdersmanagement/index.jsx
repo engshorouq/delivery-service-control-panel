@@ -1,49 +1,43 @@
-import React, { Component } from "react";
-import axios from "axios";
-import { DatePicker, Input, Button, Icon, notification } from "antd";
+import React, { Component } from 'react';
+import axios from 'axios';
+import { DatePicker, Input, Button, Icon, notification } from 'antd';
 
-import moment from "moment";
-import Header from "../../CommonComponent/Header/index";
-import TableComponent from "../../CommonComponent/Table/Table";
-import {
-  DeletePopup,
-} from "../../CommonComponent/Table/Popups";
-import WrappedComponent from "../../HOC/WithNavSide";
-import "./style.css";
+import moment from 'moment';
+import Header from '../../CommonComponent/Header/index';
+import TableComponent from '../../CommonComponent/Table/Table';
+import { DeletePopup } from '../../CommonComponent/Table/Popups';
+import WrappedComponent from '../../HOC/WithNavSide';
+import './style.css';
 
 class OrdersManagement extends Component {
   state = {
     orders: [],
     filteredOrders: [],
-    date: "",
-    status: "",
-    error: "",
+    date: '',
+    status: '',
+    error: '',
     filter: false,
-    refresh: true
+    refresh: true,
   };
 
-
-
-
-  changeStatus = (key) => e => {
-    console.log(e, 88, key)
+  changeStatus = key => e => {
+    console.log(e, 88, key);
     const formData = new FormData();
-    formData.append("e", e);
+    formData.append('e', e);
 
     fetch(`/api/v1/putStatus/${key}`, {
-      method: "PUT",
-      body: formData
+      method: 'PUT',
+      body: formData,
     })
       .then(res => res.json())
       .then(res => {
         if (res.result) {
-          console.log(45, res.result)
+          console.log(45, res.result);
           notification.success({
-            message: "تم تغيير حالة الطلب بنجاح",
+            message: 'تم تغيير حالة الطلب بنجاح',
             duration: 1.5,
           });
         } else {
-
           notification.open({
             message: res.error,
             duration: 1.5,
@@ -51,33 +45,25 @@ class OrdersManagement extends Component {
         }
       })
       .catch(err => {
-        console.log(88, err)
+        console.log(88, err);
 
         notification.error({
-          message: "هناك خطأ اعد المحاولة مرة اخرى",
+          message: 'هناك خطأ اعد المحاولة مرة اخرى',
           duration: 1.5,
         });
       });
-
-
-
-
-
-
   };
-
 
   componentDidMount() {
     axios
-      .get("/api/v1/viewnewOrders")
+      .get('/api/v1/viewnewOrders')
       .then(res => {
-
         if (res.status === 204) {
           console.log(204);
 
-          let error = [...this.state.error];
+          const error = [...this.state.error];
           error.response = res;
-          error.response.data = "Error, No orders yet.";
+          error.response.data = 'Error, No orders yet.';
           this.setState({ error });
         } else {
           console.log(203);
@@ -85,13 +71,11 @@ class OrdersManagement extends Component {
           this.setState({ orders: res.data });
         }
       })
-      .catch(error => {
-        console.log(11, error, 22);
-        this.setState({
-          error
-        });
-      });
 
+      .catch(e => {
+        console.log(8789, e);
+        this.setState({ error: e });
+      });
   }
 
   dateFilter = object => {
@@ -102,7 +86,7 @@ class OrdersManagement extends Component {
           if (date[0].isValid() && date[1].isValid()) {
             const fromDate = date[0].toDate().setHours(0, 0, 0, 0);
             const toDate = date[1].toDate().setHours(0, 0, 0, 0);
-            let filtered = object.filter(order => {
+            const filtered = object.filter(order => {
               if (
                 moment(order.date)
                   .toDate()
@@ -122,14 +106,11 @@ class OrdersManagement extends Component {
     }
   };
 
-
-
   filter = async (type, value) => {
     const { date, status, orders } = this.state;
     let filtered = [];
-    if (type === "date") {
+    if (type === 'date') {
       await this.setState({ date: value });
-
 
       if (value.length > 0) {
         filtered = this.dateFilter(orders);
@@ -138,15 +119,13 @@ class OrdersManagement extends Component {
         this.setState({ filteredOrders: [], filter: false });
       }
     }
-
-
   };
 
   clearFields = async () => {
     await this.setState({
-      date: "",
-      status: "",
-      filter: false
+      date: '',
+      status: '',
+      filter: false,
     });
   };
 
@@ -155,11 +134,12 @@ class OrdersManagement extends Component {
       return { orders: prev.orders.filter(data => data.key !== id) };
     });
   };
+
   updateOrdersStateVariable = (storeId, phone, address, itms, orderId) => {
     this.setState(prev => {
       prev.orders.forEach(element => {
         if (element.key === orderId) {
-          let x = element;
+          const x = element;
           x.storeId = storeId;
           x.address = address;
           x.phone = phone;
@@ -177,8 +157,9 @@ class OrdersManagement extends Component {
       this.setState({ refresh: !this.state.refresh });
     });
   };
+
   updateItemsStateVariable = (itms, orderId) => {
-    let x = this.state.orders;
+    const x = this.state.orders;
     x.forEach(element => {
       if (element.key === orderId) {
         element.items = itms;
@@ -196,27 +177,33 @@ class OrdersManagement extends Component {
 
   render() {
     const { RangePicker } = DatePicker;
-    const dateFormat = "DD-MM-YYYY";
+    const dateFormat = 'DD-MM-YYYY';
     if (!this.state.error) {
       return (
         <div className="ordersManagement-bars-container">
           <div className="ordersManagement-main-container">
-            <Header title={"إدارة الطلبات الجديدة"} Icon={<Icon type="carry-out" />} />
+            <Header
+              title="إدارة الطلبات الجديدة"
+              Icon={<Icon type="carry-out" />}
+            />
             <div className="ordersManagement_sub-container">
               <div>
-
                 <div className="ordersManagement_filters-container">
                   <div className="ordersManagement_filters-container-timeFilter">
                     <p
-                      style={{ textAlign: "right", fontWeight: '600', color: '#a22a5f' }}
+                      style={{
+                        textAlign: 'right',
+                        fontWeight: '600',
+                        color: '#a22a5f',
+                      }}
                       className="ordersManagemet_timePicker-lable"
                     >
                       إختر الفترة
                     </p>
                     <RangePicker
-                      placeholder={["من", "إلى"]}
+                      placeholder={['من', 'إلى']}
                       format={dateFormat}
-                      onChange={e => this.filter("date", e)}
+                      onChange={e => this.filter('date', e)}
                       value={this.state.date}
                     />
                   </div>
@@ -233,7 +220,6 @@ class OrdersManagement extends Component {
                   pageName="neworders"
                   DeletePopup={DeletePopup}
                   changeStatus={this.changeStatus}
-
                   updateOrdersStateVariable={this.updateOrdersStateVariable}
                   updateItemsStateVariable={this.updateItemsStateVariable}
                   deleteRow={this.deleteRow}
@@ -248,21 +234,21 @@ class OrdersManagement extends Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div className="ordersManagement_error-class">
-          <h1>
-            {this.state.error.response
-              ? this.state.error.response.status
-              : "Error"}{" "}
-            {this.state.error.response ? "Error" : ""},
-            {this.state.error.response.data
-              ? this.state.error.response.data
-              : "try again later"}{" "}
-          </h1>
-        </div>
-      );
     }
+    return (
+      <div className="ordersManagement_error-class">
+        <h1>
+          {this.state.error.response
+            ? this.state.error.response.status
+            : 'Error'}{' '}
+          {this.state.error.response ? 'Error' : ''},
+          {this.state.error.response.data
+            ? this.state.error.response.data
+            : 'try again later'}{' '}
+          {this.state.error.status} {this.state.error.statusText}
+        </h1>
+      </div>
+    );
   }
 }
 

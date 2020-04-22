@@ -1,14 +1,260 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router";
-import { Table, Divider, Tag, Icon, Select } from "antd";
-import PropTypes from "prop-types";
-import DropdownMenu from "./dropdownMenu";
-import "./style.css";
+// import React, { Component } from "react";
+// import { withRouter } from "react-router";
+// import { Table, Divider, Tag, Icon, Select } from "antd";
+// import PropTypes from "prop-types";
+// import DropdownMenu from "./dropdownMenu";
+// import "./style.css";
+// const { Option } = Select;
+
+// class TableCmponent extends Component {
+//   state = {
+//     pageSize: "10"
+//   };
+
+//   paginationSize = pageSize => {
+//     this.setState({ pageSize });
+//   };
+
+//   componentWillReceiveProps(props) {
+//     this.setState({ pageSize: props.columns.length })
+//   }
+//   render() {
+//     const {
+//       ViewPopup,
+//       columns,
+//       EditPopup,
+//       DeletePopup
+//     } = this.props;
+//     const { pageSize } = this.state;
+//     const { Column } = Table;
+//     if (this.props.pageName === 'orders') {
+//       return (
+//         <div className="table-container">
+//           <DropdownMenu
+//             pageSize={pageSize}
+//             paginationSize={this.paginationSize}
+//           />
+//           <Table
+//             dataSource={columns}
+//             pagination={{
+//               pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize),
+//             }}
+//           >
+//             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
+//             <Column title="التاريخ" dataIndex="date" key="date" />
+//             <Column
+//               title="الحالة"
+//               dataIndex="b_status"
+//               key="b_status"
+//               render={b_status => (
+//                 <span>
+//                   <Tag
+//                     color={
+//                       b_status == 1
+//                         ? '#f10e15'
+//                         : b_status == 0
+//                           ? 'green'
+//                           : 'blue'
+//                     }
+//                     key={b_status}
+//                   >
+//                     {b_status == 0
+//                       ? 'مستلم'
+//                       : b_status == 1
+//                         ? 'غير مستلم'
+//                         : b_status}
+//                   </Tag>
+//                 </span>
+//               )}
+//             />
+//             <Column
+//               title="خيارات"
+//               key="options"
+//               render={(text, record) => (
+//                 <span>
+//                   <ViewPopup
+//                     customerName={record.customer}
+//                     phoneNumber={record.phone ? record.phone : ''}
+//                     customerAddress={record.address}
+//                     itemsArray={record.items}
+//                     storeId={record.storeid}
+//                     orderId={record.key}
+//                     captainName={record.captain}
+//                     orderDate={record.date}
+//                     orderStatus={record.b_status}
+//                     orderPrice={record.price}
+//                   />
+//                   <Divider type="vertical" />
+
+//                   <Divider type="vertical" />
+
+//                   <DeletePopup
+//                     deleteRow={this.props.deleteRow}
+//                     id={record.key}
+//                   />
+//                 </span>
+//               )}
+//             />
+//           </Table>
+//         </div>
+//       );
+//     }
+//     else if (this.props.pageName === 'neworders') {
+//       return (
+//         <div className="table-container">
+//           <DropdownMenu
+//             pageSize={pageSize}
+//             paginationSize={this.paginationSize}
+//           />
+//           <Table
+//             dataSource={columns}
+//             pagination={{
+//               pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize),
+//             }}
+//           >
+//             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
+//             <Column title="التاريخ" dataIndex="date" key="date" />
+//             <Column title="جوال الزبون" dataIndex="phone" key="phone" />
+//             <Column title="المبلغ الأجمالي(ر.س)" dataIndex="pri" key="pri" />
+//             <Column
+//               title="خيارات"
+//               key="options"
+//               render={(text, record) => (
+//                 <span>
+//                   <Select
+//                     defaultValue="2"
+//                     onChange={this.props.changeStatus(record.key)}
+//                   >
+//                     <Option value="2">جديد</Option>
+//                     <Option value="0">تم الاستلام</Option>
+//                     <Option value="1">غير مستلم</Option>
+//                   </Select>
+
+//                   <Divider type="vertical" />
+
+//                   <DeletePopup
+//                     deleteRow={this.props.deleteRow}
+//                     id={record.key}
+//                   />
+//                 </span>
+//               )}
+//             />
+//           </Table>
+//         </div>
+//       );
+//     }
+//     else if (this.props.pageName === 'customers') {
+//       return (
+//         <div className="tablecustomer-container">
+//           <DropdownMenu
+//             pageSize={pageSize}
+//             paginationSize={this.paginationSize}
+//           />
+//           <Table
+//             dataSource={columns}
+//             pagination={{
+//               pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize),
+//             }}
+//           >
+//             <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
+//             <Column
+//               title="رقم الجوال"
+//               dataIndex="s_mobile_number"
+//               key="mobileNo"
+//             />
+//             <Column
+//               title="الحالة"
+//               dataIndex="b_status"
+//               key="status"
+//               render={status => (
+//                 <span>
+//                   <Tag
+//                     color={
+//                       status === false
+//                         ? 'volcano'
+//                         : status === true
+//                           ? 'green'
+//                           : 'blue'
+//                     }
+//                     key={status}
+//                   >
+//                     {status === true
+//                       ? 'فعال /مستلم'
+//                       : status === false
+//                         ? ' غير فعال/غير مستلم'
+//                         : status}
+//                   </Tag>
+//                 </span>
+//               )}
+//             />
+//             <Column
+//               title="خيارات"
+//               key="options"
+//               render={(text, record) => (
+//                 <span>
+//                   <Icon
+//                     onClick={() => {
+//                       this.props.history.push(
+//                         `/customers/profile/${record.pk_i_id}`
+//                       );
+//                     }}
+//                     style={{
+//                       fontSize: '1.2rem',
+//                       color: 'rgba(0, 0, 0, 0.65)',
+//                     }}
+//                     type="profile"
+//                   />
+//                   <Divider type="vertical" />
+
+//                   <Icon
+//                     onClick={this.props.handleClick(
+//                       'customersPage',
+//                       'delete',
+//                       'deleteVisibility',
+//                       record,
+//                       record.pk_i_id
+//                     )}
+//                     style={{
+//                       fontSize: '1.2rem',
+//                       color: 'rgba(0, 0, 0, 0.65)',
+//                     }}
+//                     type="delete"
+//                   />
+//                 </span>
+//               )}
+//             />
+//           </Table>
+//         </div>
+//       );
+//     }
+
+
+//   }
+// }
+
+// TableCmponent.propTypes = {
+//   columns: PropTypes.array.isRequired,
+//   viewPopup: PropTypes.func.isRequired,
+//   editPopup: PropTypes.func.isRequired,
+//   deletePopup: PropTypes.func.isRequired
+// };
+
+// const TableComponent = withRouter(TableCmponent);
+
+// export default TableComponent;
+
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
+import { Table, Divider, Tag, Icon, Select } from 'antd';
+import PropTypes from 'prop-types';
+import DropdownMenu from './dropdownMenu';
+import './style.css';
+
 const { Option } = Select;
 
 class TableCmponent extends Component {
   state = {
-    pageSize: "10",
+    pageSize: '10',
   };
 
   paginationSize = pageSize => {
@@ -16,8 +262,9 @@ class TableCmponent extends Component {
   };
 
   componentWillReceiveProps(props) {
-    this.setState({ pageSize: props.columns.length })
+    this.setState({ pageSize: props.columns.length });
   }
+
   render() {
     const {
       ViewPopup,
@@ -28,7 +275,7 @@ class TableCmponent extends Component {
     } = this.props;
     const { pageSize } = this.state;
     const { Column } = Table;
-    if (this.props.pageName === "orders") {
+    if (this.props.pageName === 'orders') {
       return (
         <div className="table-container">
           <DropdownMenu
@@ -38,7 +285,7 @@ class TableCmponent extends Component {
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
+              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize),
             }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
@@ -52,17 +299,17 @@ class TableCmponent extends Component {
                   <Tag
                     color={
                       b_status == 1
-                        ? "#f10e15"
+                        ? '#f10e15'
                         : b_status == 0
-                          ? "green"
-                          : "blue"
+                          ? 'green'
+                          : 'blue'
                     }
                     key={b_status}
                   >
                     {b_status == 0
-                      ? "مستلم"
+                      ? 'مستلم'
                       : b_status == 1
-                        ? "غير مستلم"
+                        ? 'غير مستلم'
                         : b_status}
                   </Tag>
                 </span>
@@ -75,7 +322,7 @@ class TableCmponent extends Component {
                 <span>
                   <ViewPopup
                     customerName={record.customer}
-                    phoneNumber={record.phone ? record.phone : ""}
+                    phoneNumber={record.phone ? record.phone : ''}
                     customerAddress={record.address}
                     itemsArray={record.items}
                     storeId={record.storeid}
@@ -84,6 +331,10 @@ class TableCmponent extends Component {
                     orderDate={record.date}
                     orderStatus={record.b_status}
                     orderPrice={record.price}
+                    pay={record.pay}
+                    quntity={record.quntity}
+
+
                   />
                   <Divider type="vertical" />
 
@@ -101,8 +352,7 @@ class TableCmponent extends Component {
       );
     }
 
-
-    if (this.props.pageName === "neworders") {
+    if (this.props.pageName === 'neworders') {
       return (
         <div className="table-container">
           <DropdownMenu
@@ -112,30 +362,30 @@ class TableCmponent extends Component {
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
+              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize),
             }}
           >
             <Column title="إسم الزبون" dataIndex="customer" key="customer" />
             <Column title="التاريخ" dataIndex="date" key="date" />
             <Column title="جوال الزبون" dataIndex="phone" key="phone" />
+            <Column title="طريقة الدفع" dataIndex="pay" key="pay" />
+            <Column title="الكمية" dataIndex="quntity" key="quntity" />
+
             <Column title="المبلغ الأجمالي(ر.س)" dataIndex="pri" key="pri" />
+
             <Column
               title="خيارات"
               key="options"
               render={(text, record) => (
-
                 <span>
                   <Select
                     defaultValue="2"
-                    onChange={this.props.changeStatus(
-                      record.key
-                    )}
+                    onChange={this.props.changeStatus(record.key)}
                   >
                     <Option value="2">جديد</Option>
                     <Option value="0">تم الاستلام</Option>
                     <Option value="1">غير مستلم</Option>
                   </Select>
-
 
                   <Divider type="vertical" />
 
@@ -151,8 +401,7 @@ class TableCmponent extends Component {
       );
     }
 
-
-    else if (this.props.pageName === "customers") {
+    if (this.props.pageName === 'customers') {
       return (
         <div className="tablecustomer-container">
           <DropdownMenu
@@ -162,7 +411,7 @@ class TableCmponent extends Component {
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
+              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize),
             }}
           >
             <Column title="إسم الزبوون" dataIndex="s_name" key="customer" />
@@ -180,17 +429,17 @@ class TableCmponent extends Component {
                   <Tag
                     color={
                       status === false
-                        ? "volcano"
+                        ? 'volcano'
                         : status === true
-                          ? "green"
-                          : "blue"
+                          ? 'green'
+                          : 'blue'
                     }
                     key={status}
                   >
                     {status === true
-                      ? "فعال /مستلم"
+                      ? 'فعال /مستلم'
                       : status === false
-                        ? " غير فعال/غير مستلم"
+                        ? ' غير فعال/غير مستلم'
                         : status}
                   </Tag>
                 </span>
@@ -208,8 +457,8 @@ class TableCmponent extends Component {
                       );
                     }}
                     style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
+                      fontSize: '1.2rem',
+                      color: 'rgba(0, 0, 0, 0.65)',
                     }}
                     type="profile"
                   />
@@ -217,15 +466,15 @@ class TableCmponent extends Component {
 
                   <Icon
                     onClick={this.props.handleClick(
-                      "customersPage",
-                      "delete",
-                      "deleteVisibility",
+                      'customersPage',
+                      'delete',
+                      'deleteVisibility',
                       record,
                       record.pk_i_id
                     )}
                     style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
+                      fontSize: '1.2rem',
+                      color: 'rgba(0, 0, 0, 0.65)',
                     }}
                     type="delete"
                   />
@@ -237,8 +486,7 @@ class TableCmponent extends Component {
       );
     }
 
-
-    else if (this.props.pageName === "singleCustomer") {
+    if (this.props.pageName === 'singleCustomer') {
       return (
         <div className="table-container">
           <DropdownMenu
@@ -248,41 +496,27 @@ class TableCmponent extends Component {
           <Table
             dataSource={columns}
             pagination={{
-              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize)
+              pageSize: isNaN(pageSize) ? columns.length : parseInt(pageSize),
             }}
           >
-            <Column title="إسم المنتج" dataIndex="product" key="product" />
-            product
-            <Column title="التاريخ" dataIndex="date" key="date" />
+            <Column title="كمية المنتج" dataIndex="product" key="product" />
+            <Column title="سعر الطلب" dataIndex="price" key="price" />
+            <Column title="طريقة الدفع" dataIndex="pay" key="pay" />
 
+            <Column title="التاريخ" dataIndex="date" key="date" />
             <Column
               title="الحالة"
               dataIndex="status"
               key="status"
               render={status => (
-
-
-
-
-
-
-
                 <span>
                   <Tag
                     color={
-                      status == 1
-                        ? "#f10e15"
-                        : status == 0
-                          ? "green"
-                          : "blue"
+                      status == 1 ? '#f10e15' : status == 0 ? 'green' : 'blue'
                     }
                     key={status}
                   >
-                    {status == 0
-                      ? "مستلم"
-                      : status == 1
-                        ? "غير مستلم"
-                        : "جديد"}
+                    {status == 0 ? 'مستلم' : status == 1 ? 'غير مستلم' : 'جديد'}
                   </Tag>
                 </span>
               )}
@@ -292,19 +526,17 @@ class TableCmponent extends Component {
               key="options"
               render={(text, record) => (
                 <span>
-
-
                   <Divider type="vertical" />
                   <Icon
                     onClick={this.props.viewValues(
-                      "singleCustomer",
-                      "deleteVisibility",
+                      'singleCustomer',
+                      'deleteVisibility',
                       record.key,
                       record
                     )}
                     style={{
-                      fontSize: "1.2rem",
-                      color: "rgba(0, 0, 0, 0.65)"
+                      fontSize: '1.2rem',
+                      color: 'rgba(0, 0, 0, 0.65)',
                     }}
                     type="delete"
                   />
@@ -315,11 +547,6 @@ class TableCmponent extends Component {
         </div>
       );
     }
-
-
-
-
-
   }
 }
 
@@ -327,7 +554,7 @@ TableCmponent.propTypes = {
   columns: PropTypes.array.isRequired,
   viewPopup: PropTypes.func.isRequired,
   editPopup: PropTypes.func.isRequired,
-  deletePopup: PropTypes.func.isRequired
+  deletePopup: PropTypes.func.isRequired,
 };
 
 const TableComponent = withRouter(TableCmponent);

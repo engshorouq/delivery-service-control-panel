@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import axios from "axios";
-import "./style.css";
+import React, { Component } from 'react';
+import axios from 'axios';
+import './style.css';
 import {
   Button,
   Select,
@@ -10,11 +10,10 @@ import {
   Cascader,
   Icon,
   notification,
-  Table
-} from "antd";
+  Table,
+} from 'antd';
 
 const { Option } = Select;
-
 
 class ViewForm extends React.Component {
   state = {
@@ -22,14 +21,14 @@ class ViewForm extends React.Component {
     storeNameArray: [],
     itemsInputs: [],
     key: 0,
-    storeName: ""
+    storeName: '',
   };
 
   componentDidMount() {
     this.setState({
       itemsInputs: this.props.itemsArray
         ? JSON.parse(JSON.stringify(this.props.itemsArray))
-        : []
+        : [],
     });
   }
 
@@ -38,13 +37,13 @@ class ViewForm extends React.Component {
       visible: true,
       itemsInputs: this.props.itemsArray
         ? JSON.parse(JSON.stringify(this.props.itemsArray))
-        : []
+        : [],
     });
   };
 
   handleCancel = () => {
     this.setState({
-      visible: false
+      visible: false,
     });
   };
 
@@ -54,35 +53,37 @@ class ViewForm extends React.Component {
       phoneNumber,
       customerAddress,
       orderStatus,
-      orderPrice
+      pay,
+      quntity,
+      orderPrice,
     } = this.props;
     const { getFieldDecorator } = this.props.form;
-  
+
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 }
+        sm: { span: 8 },
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 16 }
-      }
+        sm: { span: 16 },
+      },
     };
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
           span: 24,
-          offset: 0
+          offset: 0,
         },
         sm: {
           span: 16,
-          offset: 8
-        }
-      }
+          offset: 8,
+        },
+      },
     };
 
-    const prefixSelector = getFieldDecorator("prefix", {
-      initialValue: phoneNumber.substring(0, 4)
+    const prefixSelector = getFieldDecorator('prefix', {
+      initialValue: phoneNumber.substring(0, 4),
     })(
       <Select style={{ width: 70 }}>
         <Option value="970">{phoneNumber.substring(0, 4)}</Option>
@@ -93,8 +94,8 @@ class ViewForm extends React.Component {
         <Icon
           type="profile"
           style={{
-            fontSize: "1.2rem",
-            color: "rgba(0, 0, 0, 0.65)"
+            fontSize: '1.2rem',
+            color: 'rgba(0, 0, 0, 0.65)'
           }}
           onClick={this.showModal}
         />
@@ -104,8 +105,10 @@ class ViewForm extends React.Component {
           visible={this.state.visible}
           onCancel={this.handleCancel}
           cancelText="إالغاء"
-          destroyOnClose={true}
-          style={{ direction: "rtl", width: "575" }}
+          onOk={this.handleCancel}
+          okText="تم العرض"
+          destroyOnClose
+          style={{ direction: 'rtl', width: '575' }}
           closable={false}
         >
           <div className="view__captain">
@@ -114,8 +117,8 @@ class ViewForm extends React.Component {
               <p className="view__captain-value">{customerName}</p>
             </div>
             <div className="view__captain-box">
-              <p className="view__captain__paragraph">تاريخ الطلبية : </p>
-              <p className="view__captain-value">{this.props.orderDate}</p>
+              <p className="view__captain__paragraph">  الكمية: </p>
+              <p className="view__captain-value">{quntity}</p>
             </div>
 
             <div className="view__captain-box">
@@ -124,16 +127,16 @@ class ViewForm extends React.Component {
             </div>
 
             <div className="view__captain-box">
-              <p className="view__captain__paragraph">حالة الطلب : </p>
+              <p className="view__captain__paragraph"> طريقة الدفع : </p>
               <p className="view__captain-value">
-                {orderStatus == 0 ? "مستلم" : "غير مستلم"}
+                {pay}
               </p>
             </div>
             <div className="view__captain-box">
               <p className="view__captain__paragraph"> هاتف الزبون: </p>
               <p className="view__captain-value">{phoneNumber}</p>
             </div>
-        
+
             <div className="view__captain-box">
               <p>السعر الكلي : </p>
               <p className="view__captain-value">{orderPrice} ر.س</p>
@@ -145,42 +148,44 @@ class ViewForm extends React.Component {
   }
 }
 
-
 const ViewPopup = Form.create()(ViewForm);
-
 
 class DeletePopup extends Component {
   state = {
     visible: false,
-    id: this.props.id
+    id: this.props.id,
   };
+
   openNotificationWithIcon = (type, message) => {
     notification[type]({
-      message: message,
-      duration: 1.5
+      message,
+      duration: 1.5,
     });
   };
+
   showModal = () => {
     this.setState({
-      visible: true
+      visible: true,
     });
   };
+
   handleOk = e => {
-    fetch(`/api/v1/deleteOrder/${this.props.id}`, { method: "DELETE" })
+    fetch(`/api/v1/deleteOrder/${this.props.id}`, { method: 'DELETE' })
       .then(res => res.json())
       .then(res => {
         const { error } = res;
         if (error) {
-          this.openNotificationWithIcon("error", error);
+          this.openNotificationWithIcon('error', error);
         } else {
           this.props.deleteRow(this.props.id);
-          this.openNotificationWithIcon("success", "Delete Done");
+          this.openNotificationWithIcon('success', 'Delete Done');
         }
       })
       .catch(() => {
-        this.openNotificationWithIcon("warning", "Error, please try again");
+        this.openNotificationWithIcon('warning', 'Error, please try again');
       });
   };
+
   handleCancel = e => {
     this.setState({ visible: false });
   };
@@ -191,8 +196,8 @@ class DeletePopup extends Component {
         <Icon
           type="delete"
           style={{
-            fontSize: "1.2rem",
-            color: "rgba(0, 0, 0, 0.65)"
+            fontSize: '1.2rem',
+            color: 'rgba(0, 0, 0, 0.65)'
           }}
           onClick={this.showModal}
         />
@@ -203,7 +208,7 @@ class DeletePopup extends Component {
           cancelText="الغاء"
           okText="حذف"
           onCancel={this.handleCancel}
-          style={{ direction: "rtl" }}
+          style={{ direction: 'rtl' }}
           className="deleteModal"
         >
           <p>هل تريد بالتأكيد حذف الطلب ؟</p>
@@ -213,7 +218,4 @@ class DeletePopup extends Component {
   }
 }
 
-export {
-  
-  DeletePopup, ViewPopup
-};
+export { DeletePopup, ViewPopup };

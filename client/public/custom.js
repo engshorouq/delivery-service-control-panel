@@ -1,1 +1,0 @@
-var wpwlOptions = {style:"card"}

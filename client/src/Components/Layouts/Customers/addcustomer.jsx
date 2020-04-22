@@ -15,7 +15,7 @@ const CollectionCreateForm = Form.create({ name: 'form_in_modal' })(
       } else cb('يرجى ادخال البريد الالكتروني')
     }
     handelName = (rule, value, cb) => {
-      if (!value) cb('يرجى ادخال الاسم')
+      if (!value && !(/^([أ-يa-zA-Z0-9]|\s)+$/.test(value))) cb('يرجى ادخال الاسم')
       else cb()
     }
     handlePhone = (rule, value, cb) => {

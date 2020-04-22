@@ -1,21 +1,10 @@
-/* .login {
+.login {
   display: flex;
   flex-direction: column;
-  background-color: #a22a5f;
+  background-color: #201F2B;
   height: 100vh;
 
 }
-.app {
-  display: flex;
-  flex-direction: column;
-}
-
-
-
-
-
-
-
 .login__title {
   height: 12rem;
   color: #fff;
@@ -55,7 +44,7 @@
   font-size: 1rem;
   margin-top: 2rem;
   color: white;
-  background-color: #a22a5f;
+  background-color: #201F2B;
   border-radius: 0.4rem;
   outline: none;
   font-family: cairo;
@@ -64,8 +53,8 @@
 } 
 
 .login__box__button:hover{
-  background: #db78a3;
-  box-shadow: 0 0 5px #db78a3;
+  background: #101017;
+  box-shadow: 0 0 5px #201f2c;
 }
 
 .login__box__title{
@@ -76,4 +65,4 @@
 
 .login__box__error{
   color: rgb(255, 83, 83);
-} */
+}

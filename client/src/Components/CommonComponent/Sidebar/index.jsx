@@ -111,7 +111,7 @@ export default class Sidebar extends Component {
           <h1 className="sidebar__header">فولاج</h1>
           <div className="sidebar__bar">
             <div className='home'>
-              <Link to="/control" className="sidebar__links ">
+              <Link to="/" className="sidebar__links ">
                 <span>
                   الرئيسية
             <Icon type="home" className='icon-style' />
@@ -119,14 +119,12 @@ export default class Sidebar extends Component {
 
               </Link>
             </div>
-            <div className='home'>
-              <Link to="/neworders" className="sidebar__links" >
+            <div className="home">
+              <Link to="/neworders" className="si-sidebar__links">
                 <span>
-                  إدارة الطلبات الجديدة
-            {' '}
-                  <Icon type="menu-unfold" className='icons-style' />
+                  إدارة الطلبات الجديدة{' '}
+                  <Icon type="menu-unfold" className="icons-style" />
                 </span>
-
               </Link>
             </div>
             <div className='home'>
@@ -159,8 +157,6 @@ export default class Sidebar extends Component {
 
 
             </div>
-
-
 
 
 

@@ -305,11 +305,10 @@ textarea {
 }
 .popupModal .popupModal_add-item-icon {
   font-size: 20px;
-  float: right;
-  margin-top: 170px;
-  margin-right: 9px;
   color: #28a745;
-  position: relative;
+  position: absolute;
+  top: 15.8rem;
+  right: 27rem;
 }
 .popupModal_remove-item-icon {
   font-size: 20px;
@@ -360,6 +359,9 @@ textarea {
 .has-error .ant-form-split {
   font-size: 10px !important;
   float: right !important;
+}
+.view__captain-box{
+  display: flex;
 }
 .ViewPopup .ant-col-xs-24.ant-form-item-label {
   display: flex;

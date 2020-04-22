@@ -36,6 +36,7 @@ CREATE TABLE orders
     pk_i_id SERIAL PRIMARY KEY,
     dt_create_at DATE DEFAULT current_date,
     product_name TEXT,
+    pay TEXT,
     i_status INTEGER DEFAULT 2,--0 INPROGRESS 1 DONE
     o_price FLOAT
 

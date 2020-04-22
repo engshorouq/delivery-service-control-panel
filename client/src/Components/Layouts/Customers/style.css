@@ -1,4 +1,4 @@
-/* .containercustomers {
+.containercustomers {
   display: flex;
 }
 
@@ -113,8 +113,8 @@
 .modalform .has-error .ant-form-explain, .has-error .ant-form-split {
     font-size: 9px !important;
 }
-.has-error .ant-form-explain, .has-error .ant-form-split {
-  font-size: 12px !important;
+.modalcontainer .has-error .ant-form-explain, .has-error .ant-form-split {
+  font-size: 10px !important;
 }
 .modalform_phone .has-error .ant-form-explain,
 .has-error .ant-form-split {
@@ -261,4 +261,4 @@
   background: #ff4343;
   border: none;
   color: white
-} */
+}

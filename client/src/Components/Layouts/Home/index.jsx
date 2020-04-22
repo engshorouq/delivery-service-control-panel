@@ -44,7 +44,7 @@ class Home extends Component {
             <CountBox
               title="الزبائن"
               number={customers}
-              color="#88B0D6"
+              color="#156FE9"
               icon={<Icon type="team" />}
             />
           </div>

@@ -1,5 +1,48 @@
-/* .profile {
-    width: 66rem;
+.view-captain-orders {
+    width: 83%;
+  
+  }
+  
+  .view-captain-orders-title {
+    margin-top: 2rem;
+    margin-bottom: 2.6rem;
+    text-align: end;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-right: 5rem;
+  }
+  
+  .view-captain span {
+    margin-left: 1rem;
+    font-weight: bold;
+  }
+  
+  .view__captain__paragraph {
+    font-weight: bold;
+  }
+  
+  .viewModal span {
+    font-weight: bold;
+    font-family: cairo;
+  }
+  
+  .viewModal button {
+    background-color: #f44;
+    font-weight: bold;
+    color: aliceblue;
+    font-family: cairo;
+  }
+  
+  .viewModal .ant-table table {
+    border: 1px solid #eee;
+  }
+  
+  .view-captain-orders .table-container {
+    width: 90%;
+  }
+
+.profile {
+    width: 85%;
     font-size: 13px;
     border: 1px solid white;
 }
@@ -7,7 +50,7 @@
 .profile__info {
     display: flex;
     flex-wrap: wrap;
-    width: 65rem;
+    width: 92%;
     flex-direction: row-reverse;
     padding: 1rem;
     margin-right: 2rem;
@@ -51,17 +94,22 @@
     border: 1px solid gray;
     padding: 1px;
 }
-.deleteModal .ant-modal-footer, .viewModal .ant-modal-footer{
+
+.deleteModal .ant-modal-footer,
+.viewModal .ant-modal-footer {
     text-align: left;
 }
-.deleteModal{
+
+.deleteModal {
     direction: "rtl"
 }
-.deleteModal .ant-btn-primary{
+
+.deleteModal .ant-btn-primary {
     background: rgb(255, 68, 68);
     border: none;
     margin-right: 1rem;
 }
+
 .viewModal .ant-btn-primary {
     display: none;
 }
@@ -72,23 +120,36 @@
     justify-content: space-between;
     margin-right: 1rem;
 }
-.view__captain-box{
+
+.view__captain-box {
     display: flex;
     margin-left: 1.3rem;
     padding: 0.3rem;
 }
-.viewModal .ant-modal-content{
+
+.viewModal .ant-modal-content {
     width: 105%;
 }
-.viewModal .ant-modal-title{
+
+.viewModal .ant-modal-title {
     font-weight: bold;
     font-family: 'cairo';
 }
-.view__captain-value{
+
+.view__captain-value {
     font-weight: lighter;
     margin-right: 0.7rem;
 }
-.view__captain-table{
+
+.view__captain-table {
     width: 100%;
     margin: 1rem 0;
-} */
+}
+
+.profile__orders .view-captain-orders-title {
+    margin-right: 7rem;
+}
+
+.profile__orders .table-container {
+    width: 90%;
+}
