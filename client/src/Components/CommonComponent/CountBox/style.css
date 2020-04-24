@@ -1,11 +1,11 @@
-.card {
+.count-card {
     width: 13.5rem;
     border-radius: 5px;
     height: 9rem;
     position: relative;
 }
 
-.card i {
+.count-card i {
     position: absolute;
     font-size: 7.5rem;
     color: #f0f8ff36;

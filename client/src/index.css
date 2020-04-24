@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lateef&display=swap');
+/* @import url('https://fonts.googleapis.com/css?family=Lateef&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Cairo&display=swap');
 .html {
   font-size: 62.5%;
@@ -36,20 +36,7 @@ code {
   font-weight: bold;
   font-size: 1.8 rem;
 }
-p {
-  font-family: Cairo;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 1.6 rem;
-  color: #000000;
-}
-h2,
-h3 {
-  font-family: "Cairo";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 1.6 rem
-}
+
 ::-webkit-scrollbar {
   width: 5px;
   background: #201F2B;
@@ -57,4 +44,4 @@ h3 {
 ::-webkit-scrollbar-thumb {
   width: 50px;
   background: #c4c4c4b1
-}
+} */

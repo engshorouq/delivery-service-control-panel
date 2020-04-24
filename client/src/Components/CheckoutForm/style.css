@@ -1,0 +1,10 @@
+.pay-form label{
+  display: block;
+  padding-bottom: 15px;
+  margin-bottom: 9.2%;
+  font-size: 22px;
+}
+.pay-form input{
+  width: 50%;
+  margin-right: 12px;
+}

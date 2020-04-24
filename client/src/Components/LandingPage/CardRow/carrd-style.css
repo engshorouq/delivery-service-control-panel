@@ -1,0 +1,164 @@
+.cardddd{
+width: 22rem;
+height: 100%;
+display: flex;
+box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253) !important;
+background-color: #fff
+
+}
+
+.card-body{
+padding: 3rem 0 !important;
+}
+.f-card-text{
+  font-size: 0.9rem;
+  padding: 0.4rem 1.9rem;
+  height: 72px;
+  font-family: 'Cairo', sans-serif;
+  color: #1b1e21;
+  padding: 10px 0px;
+  margin-bottom: 10px;
+  text-align: end
+  ;
+ 
+  font-size: 15px;
+
+}
+.container-fluid .row{
+  padding-top: 1.5rem;
+
+}
+.overfl{
+  overflow: hidden;
+  width: 50%;
+
+}
+.card-img-topp{
+  transform: scale(1);
+  transition: transform 0.5s ease;
+  height: 280px;
+  width: 100%;
+  height: 100%;
+
+}
+.overfl .svg-inline--fa{
+  transform: scale(1); 
+    transition: transform 0.5s ease;
+    height: 280px;
+    height: 100%;
+    color: #a22a5f;
+    width: 50%;
+}
+  
+.mr-30{
+  margin-bottom: 30px;
+  margin-top: -10px;
+}
+
+.card-body{
+  background-color: #fff
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.rr h3 {
+  color: #253d52;
+  font-size: 16px;
+  text-transform: uppercase;
+  line-height: 34px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-family: 'Cairo', sans-serif;
+  font-weight: 600;
+  text-align: right;
+  padding-top: 20px;
+}
+
+.rr p {
+  font-family: 'Cairo', sans-serif;
+  color: #1b1e21;
+  padding: 10px 0px;
+  margin-bottom: 10px;
+  text-align: right;
+  font-size: 15px;
+}
+.cc{
+  display: flex;
+}
+.cc img {
+  width: 100%;
+  border-radius: 5px;
+  box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.29);
+}
+
+
+.card-title{
+  color: #253d52;
+    display: block;
+    font-weight: 900;
+    font-size: 19.5px;
+    font-family: 'Cairo', sans-serif;
+    text-transform: capitalize;
+}
+
+
+
+.offer {
+  background: url(../../../assets/img/about-img.jpeg) no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 1200px){
+.con {
+    width: 1170px;
+}
+}
+@media (min-width: 768px){
+.con {
+    width: 90%;
+}
+}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+
+@media only screen and (max-width: 500px) {
+  .cardddd {
+    width: 20rem;
+    height: 85%;
+}
+.bbbb{
+  padding: 20px 0px;
+}
+}
+
+
+
+
+@media only screen and (max-width: 750px) {
+  .cardddd {
+    width: 20rem;
+    height: 85%;
+}
+
+}
+

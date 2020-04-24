@@ -1,4 +1,4 @@
-.navbar{
+.cont-navbar{
     background-color: rgb(162, 42, 95);
     height: 3.5rem;
     width: 86vw;
@@ -43,3 +43,17 @@
 .navbar__container{
     display: flex;  
 }
+p {
+    font-family: Cairo;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 1.6 rem;
+    color: #000000;
+  }
+  h2,
+  h3 {
+    font-family: "Cairo";
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.6 rem
+  }

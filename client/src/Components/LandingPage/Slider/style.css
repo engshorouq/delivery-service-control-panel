@@ -1,0 +1,10 @@
+.carousel-control-next,
+.carousel-control-prev {
+  display: none !important;
+}
+
+.carousel-indicators {
+  position: absolute;
+  right: 0;
+  bottom: 58px !important;
+}

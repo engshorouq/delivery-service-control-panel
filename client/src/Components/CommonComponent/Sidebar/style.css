@@ -1,4 +1,4 @@
-.container {
+.si-container {
     position: fixed;
     right: 0rem;
     min-height: 100vh;
@@ -13,7 +13,7 @@
     scrollbar-width: none;
 }
 
-.container::-webkit-scrollbar {
+.si-container::-webkit-scrollbar {
     display: none;
 }
 
@@ -99,7 +99,7 @@
 }
 
 @media only screen and (max-width: 700px) {
-    .container {
+    .si-container {
         width: 25vw;
     }
     .sidebar {
